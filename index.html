@@ -4,14 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: red;
+        }
+        .css1{
+            color: rebeccapurple;
+            background-color: royalblue;
+        }
+    </style>
 </head>
 <body>
     <script src="./lib/Promise.js"></script>
     <script>
-        new Promise((resolve, reject) => {
-            resolve(1);
-            
-        })
+    const p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(1);
+                console.log('reject()状态改变之后');
+            }, 100)
+          })
+
+          p.then(
+              value => {
+                  console.log('onresolved1', value);
+              },
+              reason => {
+                console.log('onrejected1', reason);
+              }
+          )
+          p.then(
+            value => {
+                  console.log('onresolved2', value);
+              },
+              reason => {
+                console.log('onrejected2', reason);
+              }
+          )
     </script>
 </body>
 </html>

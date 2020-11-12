@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 面试题，最大并发异步请求6个，要尽快执行完毕
+        function queue(num){
+            let promise = Promise.resolve();
+            let url = [];
+            let maxFetchNumber = 0;
+            for (let index = 0; index < 6; index++) {
+                promiseFn()
+            }
+            function promiseFn(){
+                maxFetchNumber ++;
+                if(maxFetchNumber < 6){
+                    let time = Math.random() * 1000;
+                    setTimeout(() => {
+                        maxFetchNumber --;
+                        // 如果成功了，继续发下一个请求，number --
+                        if(num.length){
+                            let current = num.shift();
+                            console.log(current);
+                        maxFetchNumber --;
+                            promiseFn();
+                        }
+                    }, time)
+                }
+            }
+            promiseFn();
+        }
+
+
+        queue([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
+    </script>
+</body>
+</html>
